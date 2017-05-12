@@ -1,0 +1,104 @@
+@import "~sass/var";
+
+.module-image-preview {
+    cursor: pointer;
+    .close {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        height: 50px;
+        width: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 30px;
+        color: #fff; 
+        z-index: 100;
+        &:before {
+            font-family: "iconfont";
+            content: "\e613";
+        }
+    }
+    height: 100%;
+    width: 100%;
+    background: #000;
+    .preview {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+
+        .preview-item {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            // height: 100%;
+            text-align: center;
+            z-index: 1;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            transform: translate3D(100%, -50%, 0);
+            img {
+                display: inline-block;
+                max-width: 100%;
+                height: auto;
+                // display: block;
+                vertical-align: middle;
+            }
+            &.pc {
+                // height: 100%;
+                img {
+                    max-height: 100vh;
+                }
+            }
+            &.current {
+                z-index: 0;
+                transform: translate3D(0%, -50%, 0);
+            }
+            &.loading {
+                &::before {
+                    content: "";
+                    transform: translate3d(-50%, -50%, 0);
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    height: 50px;
+                    width: 50px;
+                    border-radius: 100%;
+                    border: 4px solid rgb(122, 62, 11);
+                    border-top-color: $opacityColor;
+                    border-bottom-color: $opacityColor;
+                    animation: moduleImagePreviewLoading 1s linear infinite;
+
+                    @keyframes moduleImagePreviewLoading {
+                        from {transform: translate3d(-50%, -50%, 0) rotateZ(0deg);}
+                        to {transform: translate3d(-50%, -50%, 0) rotateZ(360deg);}
+                    }
+                }
+
+            }
+        }
+
+
+        .log {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+    }
+
+    .dott {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        line-height: 2;
+        color: #fff;
+        text-align: center;
+        pointer-events: none;
+        z-index: 2;
+    }
+
+}
